@@ -64,7 +64,7 @@ def calculate_demographic_data(print_data=True):
     print('highest_earning_country_percentage: **********', highest_earning_country_percentage)
 
     # Identify the most popular occupation for those who earn >50K in India.
-    top_IN_occupation = df.loc[df['salary'] == '>50K']['occupation']
+    top_IN_occupation = df.loc[(df['native-country'] == 'India') & (df['salary'] == '>50K'), 'occupation'].value_counts(ascending=False).index[0]
 
     # DO NOT MODIFY BELOW THIS LINE
 
@@ -76,19 +76,19 @@ def calculate_demographic_data(print_data=True):
         print(f"Percentage with Bachelors degrees: {percentage_bachelors}%")
         # 16.4
         print(f"Percentage with higher education that earn >50K: {higher_education_rich}%")
-        # 46.5
+        # 46.5 *
         print(f"Percentage without higher education that earn >50K: {lower_education_rich}%")
-        # 17.4
+        # 17.4 *
         print(f"Min work time: {min_work_hours} hours/week")
         # 1
         print(f"Percentage of rich among those who work fewest hours: {rich_percentage}%")
-        # 10
+        # 10 *
         print("Country with highest percentage of rich:", highest_earning_country)
-        # 'Iran'
+        # 'Iran' *
         print(f"Highest percentage of rich people in country: {highest_earning_country_percentage}%")
-        # 41.9
+        # 41.9 *
         print("Top occupations in India:", top_IN_occupation)
-        # 'Prof-specialty'
+        # 'Prof-specialty' *
 
     return {
         'race_count': race_count,
